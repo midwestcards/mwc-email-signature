@@ -2,9 +2,11 @@
 
 A single-page tool for creating a consistent, branded Midwest Cards email signature. New team members fill in their details, hit **Copy signature**, and paste it into Gmail or Outlook.
 
+**Live generator:** https://midwestcards.github.io/mwc-email-signature/
+
 ## For new team members
 
-1. Open the generator (live page below, or just open `index.html` in a browser).
+1. Open the [live generator](https://midwestcards.github.io/mwc-email-signature/) (or open `index.html` in a browser).
 2. Fill in your name, title, phone, email, and pick your office location.
 3. Optionally paste a public https link to your headshot.
 4. Click **Copy signature**, then paste into your email client:

@@ -22,8 +22,13 @@ Team-wide defaults (company links, social URLs, office locations, disclaimer, br
 
 ### Brand assets
 
-The stacked Midwest Cards logo lives in `assets/` and is served by this repo's GitHub Pages site — signatures reference it by absolute URL, so it loads for email recipients too. Social links render as text in brand Secondary Blue (`#1E3E6B`), and the address links to Google Maps.
+All signature images live in `assets/` and are served by this repo's GitHub Pages site — signatures reference them by absolute URL, so they load for email recipients too:
 
-To add the Insider banner (330px wide): drop a PNG into `assets/`, set its URL in `CONFIG.assets.bannerUrl`, and push. Use PNG only — SVG won't render in Gmail/Outlook.
+- `midwestcards_horizontal_color.png` — logo (from the brand library, high-res)
+- `insider_banner.png` — "Become a Midwest Insider" banner
+- `icons/` — five social icons (Facebook, X, YouTube, LinkedIn, Instagram) and five contact icons (mobile, phone, email, address, website), gold, from the original team signature
+- `headshots/` — team headshots (e.g. `kate.jpg`); add new ones here so everyone has a permanent photo URL
+
+The address line links to Google Maps, and the signature ends with the full confidentiality disclaimer. To swap an image, replace the file **keeping the same filename** and push — Pages redeploys automatically.
 
 ⚠️ Don't rename or delete files in `assets/` — every signature already in use points at those URLs.

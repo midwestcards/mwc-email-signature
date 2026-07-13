@@ -42,11 +42,6 @@
   .btn-gold{background:var(--gold);color:var(--navy);}
   .btn-ghost{background:#fff;border:1px solid #d1d5db;color:#374151;}
   .btn-sm{padding:6px 12px;font-size:12px;}
-  .acc{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:8px;}
-  .acc-head{width:100%;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#f9fafb;border:none;cursor:pointer;text-align:left;font-family:'Roboto',sans-serif;}
-  .acc-head:hover{background:#f3f4f6;}
-  .acc-title{color:var(--navy);text-transform:uppercase;font-weight:600;letter-spacing:.06em;font-size:14px;font-family:'Barlow Condensed',sans-serif;}
-  .acc-body{padding:16px;border-top:1px solid var(--line);}
   .pv-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--line);background:#f9fafb;}
   .pv-title{color:var(--navy);text-transform:uppercase;font-weight:600;letter-spacing:.06em;font-size:14px;font-family:'Barlow Condensed',sans-serif;}
   .pv-body{padding:24px;overflow-x:auto;}
@@ -99,12 +94,12 @@
 
           <div class="two">
             <label class="field">
-              <span class="lab">Phone 1</span>
-              <input id="f_p1" class="inp" placeholder="614-555-0100" />
+              <span class="lab">Mobile phone</span>
+              <input id="f_p1" class="inp" placeholder="(614) 555-0100" />
             </label>
             <label class="field">
-              <span class="lab">Phone 2 (optional)</span>
-              <input id="f_p2" class="inp" placeholder="614-555-0142" />
+              <span class="lab">Office phone (optional)</span>
+              <input id="f_p2" class="inp" placeholder="(614) 555-0142" />
             </label>
           </div>
 
@@ -120,34 +115,9 @@
 
           <label class="field">
             <span class="lab">Headshot URL (optional)</span>
-            <input id="f_photo" class="inp" placeholder="https://…/your-photo.png" />
-            <span class="hint">Paste a public https link to your photo (square works best, ~200×200). Leave blank to show only the logo.</span>
+            <input id="f_photo" class="inp" placeholder="https://midwestcards.github.io/mwc-email-signature/assets/headshots/you.jpg" />
+            <span class="hint">Square photo works best. Add your photo to this repo's <code>assets/headshots/</code> folder (ask Tyler) for a permanent URL, then paste it here. Leave blank to show only the logo.</span>
           </label>
-
-          <!-- Brand assets -->
-          <div class="acc">
-            <button id="accHead" class="acc-head" type="button">
-              <span class="acc-title">Brand assets — set once <span id="accCaret">▸</span></span>
-              <span class="muted">logo · banner</span>
-            </button>
-            <div id="accBody" class="acc-body hidden">
-              <p class="muted" style="margin-top:0;line-height:1.5">
-                The durable, team-wide defaults live in the <b>CONFIG</b> block at the top of
-                <code>index.html</code> — edit those once and redeploy to change them for everyone.
-                The fields below prefill from CONFIG and let you preview overrides live. The signature
-                works without any images (text wordmark + text links).
-              </p>
-
-              <label class="field">
-                <span class="lab">Logo image URL (124px wide)</span>
-                <input id="a_logo" class="inp" placeholder="https://…/midwest-cards-logo.png" />
-              </label>
-              <label class="field">
-                <span class="lab">Insider banner image URL (330px wide)</span>
-                <input id="a_banner" class="inp" placeholder="https://…/insider-banner.png" />
-              </label>
-            </div>
-          </div>
         </section>
 
         <!-- RIGHT: preview + actions -->
@@ -186,11 +156,11 @@
           <div class="note">
             <h4>Brand assets</h4>
             <p>
-              The stacked Midwest Cards logo is already wired in (hosted in this repo’s
-              <code>assets/</code> folder). To add the Insider banner (330px wide), drop a PNG into
-              <code>assets/</code>, set its URL in the <b>CONFIG</b> block at the top of
-              <code>index.html</code>, and push — GitHub Pages redeploys automatically and everyone
-              gets it. PNG only (SVG won’t render in Gmail/Outlook).
+              The logo, Insider banner, and all social/contact icons are hosted in this repo’s
+              <code>assets/</code> folder and wired in via the <b>CONFIG</b> block at the top of
+              <code>index.html</code>. To swap one, replace the file in <code>assets/</code>
+              <b>keeping the same filename</b> and push — GitHub Pages redeploys automatically.
+              Never rename or delete files there: every signature already in use points at those URLs.
             </p>
           </div>
         </section>
@@ -204,29 +174,42 @@
    CONFIG — set once for the whole team, then commit + redeploy.
    Paste permanent, public https image URLs into "assets" below.
    ========================================================================= */
+const ASSET_BASE = "https://midwestcards.github.io/mwc-email-signature/assets";
 const CONFIG = {
   company: "Midwest Cards",
   website: "https://www.midwestcards.com/",
   websiteDisplay: "www.midwestcards.com",
-  insiderUrl: "https://www.midwestcards.com/insider/",
+  insiderUrl: "https://www.midwestcards.com/insider",
   social: {
     facebook: "https://www.facebook.com/MidwestCards",
     twitter: "https://twitter.com/midwest_cards",
     youtube: "https://www.youtube.com/@midwestcards",
+    linkedin: "https://linkedin.com/company/midwest-cards",
     instagram: "https://www.instagram.com/midwestcardshq/",
   },
-  disclaimer: "The content of this email is confidential and intended for the recipient specified in this message only.",
+  disclaimer: "The content of this email is confidential and intended for the recipient specified in message only. It is strictly forbidden to share any part of this message with any third party, without a written consent of the sender. If you received this message by mistake, please reply to this message and follow with its deletion, so that we can ensure such a mistake does not occur in the future.",
   navy: "#001D48",   // Navy Deep (brand guide)
   gold: "#E8B144",   // Accent Gold
-  link: "#1E3E6B",   // Secondary Blue — all links use this
+  link: "#1E3E6B",   // Secondary Blue — text links use this
   locations: [
-    "1171 Goodale Blvd, Columbus, OH 43212",
-    "401 N Front St #95, Columbus, OH 43215",
+    "1171 Goodale Blvd Columbus, Ohio 43212",
+    "401 N Front St STE 95 Columbus, Ohio 43215",
   ],
-  // >>> Hosted image URLs (served by this repo's GitHub Pages site) <<<
+  // All images are hosted in this repo's assets/ folder (served by GitHub Pages).
+  // Replace a file in assets/ (same filename) and push to update it for everyone.
   assets: {
-    logoUrl: "https://midwestcards.github.io/mwc-email-signature/assets/midwestcards_stacked_color.png",
-    bannerUrl: "",
+    logoUrl: `${ASSET_BASE}/midwestcards_horizontal_color.png`,
+    bannerUrl: `${ASSET_BASE}/insider_banner.png`,
+    fbIcon: `${ASSET_BASE}/icons/fb.png`,
+    twIcon: `${ASSET_BASE}/icons/x.png`,
+    ytIcon: `${ASSET_BASE}/icons/yt.png`,
+    liIcon: `${ASSET_BASE}/icons/li.png`,
+    igIcon: `${ASSET_BASE}/icons/ig.png`,
+    mobileIcon: `${ASSET_BASE}/icons/mobile.png`,
+    phoneIcon: `${ASSET_BASE}/icons/phone.png`,
+    emailIcon: `${ASSET_BASE}/icons/email.png`,
+    addressIcon: `${ASSET_BASE}/icons/address.png`,
+    webIcon: `${ASSET_BASE}/icons/website.png`,
   },
 };
 
@@ -240,68 +223,68 @@ const safeUrl = (u = "") => {
 };
 const safeEmail = (e = "") => String(e).trim().replace(/[<>"]/g, "");
 
-/* ---- signature builder (email-safe HTML string) ---- */
-function buildSignature(f, aRaw) {
-  const a = {
-    logoUrl: safeUrl(aRaw.logoUrl), bannerUrl: safeUrl(aRaw.bannerUrl),
-  };
+/* ---- signature builder (email-safe HTML string, matches the team template) ---- */
+function buildSignature(f) {
+  const a = CONFIG.assets;
   const photoUrl = safeUrl(f.photoUrl);
   const name = esc(f.name) || "Your Name";
   const email = safeEmail(f.email);
   const link = CONFIG.link;
 
   const photo = photoUrl
-    ? `<p style="margin:0 0 16px"><img src="${photoUrl}" alt="${name}" width="124" style="border:0;vertical-align:middle;max-width:124px;height:auto;border-radius:4px"></p>`
+    ? `<p style="margin:0 0 40px"><img src="${photoUrl}" alt="${name}" width="95" style="border:0;vertical-align:middle;width:95px;height:auto"></p>`
     : "";
 
-  const logo = a.logoUrl
-    ? `<a href="${CONFIG.website}" target="_blank" style="text-decoration:none"><img src="${a.logoUrl}" alt="Midwest Cards" width="124" style="border:0;vertical-align:middle;width:124px;height:auto"></a>`
-    : `<a href="${CONFIG.website}" target="_blank" style="text-decoration:none"><span style="font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:${CONFIG.navy};letter-spacing:0.5px">MIDWEST<span style="color:${CONFIG.gold}">CARDS</span></span></a>`;
+  const logo = `<p style="margin:0 0 10px"><a href="${CONFIG.website}" target="_blank" style="text-decoration:none"><img src="${a.logoUrl}" alt="Midwest Cards" width="124" style="border:0;vertical-align:middle;width:124px;height:auto"></a></p>`;
 
-  const tl = (url, label) =>
-    `<a href="${url}" target="_blank" style="color:${link};text-decoration:none;font-size:8pt;font-family:Arial,sans-serif">${label}</a>`;
-  const social = `<p style="margin:18px 0 8px">${tl(CONFIG.social.facebook, "Facebook")} &nbsp;&middot;&nbsp; ${tl(CONFIG.social.twitter, "X")} &nbsp;&middot;&nbsp; ${tl(CONFIG.social.youtube, "YouTube")} &nbsp;&middot;&nbsp; ${tl(CONFIG.social.instagram, "Instagram")}</p>`;
+  const si = (url, icon, alt) =>
+    `<a href="${url}" target="_blank" style="text-decoration:none"><img src="${icon}" width="15" height="15" alt="${alt}" style="border:0;vertical-align:middle;height:15px;width:15px"></a>`;
+  const social = `<p style="margin:20px 0 10px">${[
+    si(CONFIG.social.facebook, a.fbIcon, "facebook icon"),
+    si(CONFIG.social.twitter, a.twIcon, "twitter icon"),
+    si(CONFIG.social.youtube, a.ytIcon, "youtube icon"),
+    si(CONFIG.social.linkedin, a.liIcon, "linkedin icon"),
+    si(CONFIG.social.instagram, a.igIcon, "instagram icon"),
+  ].join("&nbsp;&nbsp;&nbsp;")}</p>`;
 
-  const leftCol = `<td width="150" valign="top" align="center" style="padding:0 20px 10px 0;text-align:center;width:150px">${photo}<p style="margin:0 0 6px">${logo}</p>${social}</td>`;
+  const leftCol = `<td width="170" valign="top" align="center" style="padding:0 20px 10px 0;text-align:center;width:170px">${photo}${logo}${social}</td>`;
 
   const roleLine = f.title ? `${esc(f.title)} | ${CONFIG.company}` : CONFIG.company;
 
+  const ic = (icon) =>
+    `<img src="${icon}" width="12" height="12" alt="" style="border:0;vertical-align:middle;height:12px;width:12px">&nbsp;&nbsp;`;
   const line = (inner) =>
     `<span style="font-size:9pt;font-family:Arial,sans-serif;color:#000;line-height:1.8">${inner}</span>`;
 
-  const phones = [f.phone1, f.phone2].filter((p) => p && p.trim());
+  const p1 = (f.phone1 || "").trim(), p2 = (f.phone2 || "").trim();
   let phoneHtml = "";
-  if (phones.length) {
-    phoneHtml = phones.map((p) => line(esc(p))).join("<br>") + "<br>";
+  if (p1 && p2) {
+    phoneHtml = line(ic(a.mobileIcon) + esc(p1)) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + line(ic(a.phoneIcon) + esc(p2)) + "<br>";
+  } else if (p1 || p2) {
+    phoneHtml = line(ic(a.mobileIcon) + esc(p1 || p2)) + "<br>";
   }
 
   let emailHtml = "";
   if (email) {
-    emailHtml = line(`<a href="mailto:${email}" style="color:${link};text-decoration:none">${esc(email)}</a>`) + "<br>";
+    emailHtml = line(ic(a.emailIcon) + `<a href="mailto:${email}" style="color:${link};text-decoration:none">${esc(email)}</a>`) + "<br>";
   }
 
   const address = (f.location || CONFIG.locations[0]).trim();
   const mapsUrl = `https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(address)}`;
-  const addrHtml = line(`<a href="${mapsUrl}" target="_blank" style="color:${link};text-decoration:none">${esc(address)}</a>`) + "<br>";
+  const addrHtml = line(ic(a.addressIcon) + `<a href="${mapsUrl}" target="_blank" style="color:#000;text-decoration:none">${esc(address)}</a>`) + "<br>";
 
-  const webHtml = line(`<a href="${CONFIG.website}" target="_blank" style="text-decoration:none"><span style="font-weight:700;color:#000;font-size:9pt">${CONFIG.websiteDisplay}</span></a>`);
+  const webHtml = line(ic(a.webIcon) + `<a href="${CONFIG.website}" target="_blank" style="text-decoration:none"><span style="font-weight:700;color:#000;font-size:9pt">${CONFIG.websiteDisplay}</span></a>`);
 
-  const banner = a.bannerUrl
-    ? `<p style="margin:18px 0 0"><a href="${CONFIG.insiderUrl}" target="_blank" style="text-decoration:none"><img src="${a.bannerUrl}" alt="Midwest Cards Insider" width="330" style="border:0;vertical-align:middle;max-width:330px;height:auto"></a></p>`
-    : "";
+  const banner = `<p style="margin:20px 0 0"><a href="${CONFIG.insiderUrl}" target="_blank" style="text-decoration:none"><img src="${a.bannerUrl}" alt="Become a Midwest Insider" width="330" style="border:0;vertical-align:middle;max-width:330px;height:auto"></a></p>`;
 
-  const rightCol = `<td valign="top" style="padding:0 0 10px;font-family:Arial,sans-serif;color:#000"><span style="font-size:20pt;font-weight:700;color:${CONFIG.navy}">${name}</span><span style="font-size:12pt"><br>${roleLine}</span><br><br>${phoneHtml}${emailHtml}${addrHtml}${webHtml}${banner}</td>`;
+  const rightCol = `<td valign="top" style="padding:0 0 10px;font-family:Arial,sans-serif;color:#000"><span style="font-size:20pt;font-weight:700">${name}</span><span style="font-size:12pt"><br>${roleLine}</span><br><br>${phoneHtml}${emailHtml}${addrHtml}${webHtml}${banner}</td>`;
 
-  return `<table cellspacing="0" cellpadding="0" border="0" style="border-spacing:0;border-collapse:collapse;font-size:14px;font-family:Arial,sans-serif;color:#000000;max-width:520px"><tbody><tr>${leftCol}${rightCol}</tr><tr><td colspan="2" style="padding:10px 0 0;border-top:1px solid ${CONFIG.navy}"><p style="margin:0;font-size:8pt;line-height:1.3;color:#808080;font-family:Arial,sans-serif">${CONFIG.disclaimer}</p></td></tr></tbody></table>`;
+  return `<table cellspacing="0" cellpadding="0" border="0" style="border-spacing:0;border-collapse:collapse;font-size:14px;font-family:Arial,sans-serif;color:#000000;max-width:500px;background:transparent"><tbody><tr>${leftCol}${rightCol}</tr><tr><td colspan="2" style="padding:10px 0 0;border-top:1px solid #000000"><p style="margin:0 0 10px;font-size:8pt;line-height:1.2;color:#808080;font-family:Arial,sans-serif">${CONFIG.disclaimer}</p></td></tr></tbody></table>`;
 }
 
 /* ---- wiring ---- */
 const $ = (id) => document.getElementById(id);
 const val = (id) => { const el = $(id); return el ? el.value : ""; };
-
-const ASSET_MAP = {
-  a_logo: "logoUrl", a_banner: "bannerUrl",
-};
 
 function currentForm() {
   return {
@@ -310,13 +293,8 @@ function currentForm() {
     email: val("f_email"), location: val("f_loc"), photoUrl: val("f_photo"),
   };
 }
-function currentAssets() {
-  const a = {};
-  Object.entries(ASSET_MAP).forEach(([id, key]) => { a[key] = val(id); });
-  return a;
-}
 function render() {
-  const html = buildSignature(currentForm(), currentAssets());
+  const html = buildSignature(currentForm());
   $("preview").innerHTML = html;
   const ta = $("code");
   if (ta) ta.value = html;
@@ -380,12 +358,6 @@ function init() {
   });
   sel.value = CONFIG.locations[0];
 
-  // prefill brand asset inputs from CONFIG
-  Object.entries(ASSET_MAP).forEach(([id, key]) => {
-    const el = $(id);
-    if (el && CONFIG.assets[key]) el.value = CONFIG.assets[key];
-  });
-
   // live updates
   document.querySelectorAll("#formCard input, #formCard select").forEach((el) => {
     el.addEventListener("input", render);
@@ -393,11 +365,6 @@ function init() {
   });
 
   // toggles
-  $("accHead").addEventListener("click", () => {
-    const body = $("accBody");
-    const open = body.classList.toggle("hidden") === false;
-    $("accCaret").textContent = open ? "▾" : "▸";
-  });
   $("btnShowCode").addEventListener("click", () => {
     const b = $("codeBlock");
     const open = b.classList.toggle("hidden") === false;

@@ -20,12 +20,10 @@ Everything lives in `index.html` — no build step, no dependencies.
 
 Team-wide defaults (company links, social URLs, office locations, disclaimer, brand colors, and image assets) live in the **CONFIG** block at the top of the `<script>` in `index.html`. Edit those once, commit, and everyone gets the update.
 
-### One-time branding setup
+### Brand assets
 
-The signature currently uses a text **MIDWEST CARDS** wordmark and text social links, so it's already usable. For the full branded look, host these images at permanent public URLs and paste them into `CONFIG.assets`:
+The stacked Midwest Cards logo lives in `assets/` and is served by this repo's GitHub Pages site — signatures reference it by absolute URL, so it loads for email recipients too. Social links render as text in brand Secondary Blue (`#1E3E6B`), and the address links to Google Maps.
 
-- Logo (124px wide, PNG)
-- Insider banner (330px wide, PNG)
-- Optional: four social icons (16px) and four contact icons (12px)
+To add the Insider banner (330px wide): drop a PNG into `assets/`, set its URL in `CONFIG.assets.bannerUrl`, and push. Use PNG only — SVG won't render in Gmail/Outlook.
 
-Use PNG only — SVG won't render in Gmail/Outlook.
+⚠️ Don't rename or delete files in `assets/` — every signature already in use points at those URLs.
